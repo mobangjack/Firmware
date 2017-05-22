@@ -412,14 +412,17 @@ then
 	lsm303d start
 fi
 
-if meas_airspeed start
+if ms5525_airspeed start
 then
-else
-	if ets_airspeed start
+	if meas_airspeed start
 	then
 	else
-		if ets_airspeed start -b 1
+		if ets_airspeed start
 		then
+		else
+			if ets_airspeed start -b 1
+			then
+			fi
 		fi
 	fi
 fi
