@@ -174,7 +174,6 @@ eagle_legacy_default: posix_eagle_legacy qurt_eagle_legacy
 excelsior_default: posix_excelsior_default qurt_excelsior_default
 excelsior_legacy_default: posix_excelsior_legacy qurt_excelsior_legacy
 
-
 # All targets with just dependencies but no recipe must either be marked as phony (or have the special @: as recipe).
 .PHONY: all posix broadcast eagle_default eagle_legacy_default excelsior_legacy_default excelsior_default all_nuttx_targets
 
@@ -188,6 +187,8 @@ qgc_firmware: px4fmu_firmware misc_qgc_extra_firmware sizes
 
 # px4fmu NuttX firmware
 px4fmu_firmware: \
+	check_px4io-v1_default \
+	check_px4io-v2_default \
 	check_px4fmu-v1_default \
 	check_px4fmu-v2_default \
 	check_px4fmu-v3_default \
@@ -218,14 +219,14 @@ alt_firmware: \
 checks_bootloaders: \
 	check_esc35-v1_bootloader \
 	check_px4cannode-v1_bootloader \
-	check_px4esc-v1_bootloader \
 	check_px4flow-v2_bootloader \
 	check_s2740vc-v1_bootloader \
+#BROKEN check_px4esc-v1_bootloader \
 # not fitting in flash	check_zubaxgnss-v1_bootloader \
 	sizes
 
 sizes:
-	@-find build_* -name firmware_nuttx -type f | xargs size 2> /dev/null || :
+	@-find build_* -name *.elf -type f | xargs size 2> /dev/null || :
 
 # All default targets that don't require a special build environment
 check: check_posix_sitl_default px4fmu_firmware misc_qgc_extra_firmware alt_firmware checks_bootloaders tests check_format

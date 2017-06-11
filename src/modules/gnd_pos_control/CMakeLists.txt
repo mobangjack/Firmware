@@ -39,7 +39,6 @@ px4_add_module(
 		GroundRoverPositionControl.cpp
 	DEPENDS
 		platforms__common
-		git_ecl
 		lib__external_lgpl
 		lib__ecl
 	)
