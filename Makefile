@@ -366,7 +366,6 @@ cppcheck: posix_sitl_default
 
 clean:
 	@rm -rf $(SRC_DIR)/build_*/
-	-@$(MAKE) --no-print-directory -C NuttX/nuttx clean
 
 submodulesclean:
 	@git submodule foreach --quiet --recursive git clean -ff -x -d
